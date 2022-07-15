@@ -23,16 +23,15 @@ var (
 )
 
 func rec(i, j uint) uint {
+	var res uint
 	if i == n {
-		return 0
-	}
-
-	if j < w[i] {
-		return rec(i+1, j)
+		res = 0
+	} else if j < w[i] {
+		res = rec(i+1, j)
 	} else {
-		return uint(math.Max(float64(rec(i+1, j)), float64(rec(i+1, j-w[i])+v[i])))
+		res = uint(math.Max(float64(rec(i+1, j)), float64(rec(i+1, j-w[i])+v[i])))
 	}
-
+	return res
 }
 
 // 记忆化搜索
