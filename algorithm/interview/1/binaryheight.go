@@ -7,7 +7,7 @@ type binary struct {
 }
 
 func main() {
-	height()
+	//height()
 }
 
 func height(node *binary) uint {
