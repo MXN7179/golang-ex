@@ -74,10 +74,64 @@ func solve2() {
 
 	fmt.Println(dp)
 }
+
+
+
+
+
+// INF
+// 大重量 O(nW)复杂度太高
+// 1 <= n <= 100        MAXN = 100
+// 1 <= wi <= 10^7
+// 1 <= vi <= 100		MAXV = 100
+// 1 <= W <= 10^9
+const (
+	INF  = 0x8fffffff
+	MAXS = 50
+)
+
+// dp[i][j]    0 <= j <= MAXN * MAXV + 1
+var (
+	sdp [MAX][MAXS + 1]int
+)
+
+func initsdp() {
+	sdp[0][0] = 0
+	for j := 1; j <= MAXS; j++ {
+		sdp[0][j] = 99 //math.MaxInt
+	}
+}
+func solve3() {
+	initsdp()
+
+	for i := 0; i < n; i++ {
+		for j := 0; j <= MAXS; j++ {
+			if j < v[i] {
+				sdp[i+1][j] = sdp[i][j]
+			} else {
+				sdp[i+1][j] = int(math.Min(float64(sdp[i][j]), float64(sdp[i][j-v[i]]+w[i])))
+			}
+		}
+	}
+
+	res := 0
+	for j := 0; j <= MAXS; j++ {
+		if sdp[n][j] <= W {
+			res = j
+		}
+	}
+	fmt.Println(res)
+	//for i := 0; i <= n; i++ {
+	//	fmt.Println(i, sdp[i])
+	//}
+}
+
+
 func main() {
 	//initdp()
 	//res := rec(0, W)
 	//fmt.Println(res)
 
-	solve2()
+	//solve2()
+	solve3()
 }
