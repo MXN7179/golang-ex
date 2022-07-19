@@ -51,6 +51,32 @@ func partition(a []int, low, high int ) int{
 	return low
 }
 
+// 另一种方法
+func quickSort2(a []int, left, right int){
+	if left < right{
+		m := partition2(a, left, right)
+		quickSort2(a, left, m - 1)
+		quickSort2(a, m + 1, right)
+	}
+}
+func partition2(a []int, left, right int) int{
+	pivot := left
+	index := pivot + 1
+
+	for i := index; i <= right; i++{
+		if a[i] < a[pivot]{
+			swap(a, i, index)
+			index++
+		}
+	}
+	swap(a, pivot, index - 1) // a[index - 1] 是 <= a[pivot]    a[index...] > a[pivot]
+	return index - 1
+}
+func swap(a[]int, i, j int){
+	tmp := a[i]
+	a[i] = a[j]
+	a[j] = tmp
+}
 
 func main() {
 	a := []int{2, 1, 3, 4, 0}
