@@ -34,7 +34,7 @@ func findK(a []int, low, high, K int) int{
 			return res
 		}else if m > K{
 			fmt.Println("m > k")
-			if low == m - 1{
+			if low == m - 1{     // 特别注意：因为到只剩两个元素的时候， low = m - 1，findK会直接退出
 				res = a[low]
 				return res
 			}
